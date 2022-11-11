@@ -13,6 +13,7 @@
 var express = require('express');
 const dorm_controlers= require('../controllers/dorms');
 var router = express.Router();
+
 /* GET dorms */
 router.get('/', dorm_controlers.dorm_view_all_Page );
 module.exports = router;
