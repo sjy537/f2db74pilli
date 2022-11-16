@@ -2,19 +2,19 @@ extends layout
 block content
  h1= title
  - let dormid = toShow._id
- - let dorm_type = toShow.dorm_type
- - let dormcost = toShow.cost
- - let dormsize = toShow.size
+ - let dorm_Name = toShow.dorm_Name
+ - let dormdorm_Type = toShow.dorm_Type
+ - let dormdorm_Cost = toShow.dorm_Cost
  div
  div.row
  div(class='dormAttr mr-3') Dorm ID is:
  div #{dormid}
  div.row
- div(class='dormAttr mr-3') Dorm Type is:
- div #{dorm_type}
- div.row
- div(class='dormAttr mr-3') Dorm Size is:
- div #{dormsize}
+ div(class='dormAttr mr-3') Dorm Name is:
+ div #{dorm_Name}
  div.row
  div(class='dormAttr mr-3') Dorm Cost is:
- div #{dormcost}
+ div #{dormdorm_Cost}
+ div.row
+ div(class='dormAttr mr-3') Dorm Type is:
+ div #{dormdorm_Type}
