@@ -40,3 +40,17 @@ ${JSON.stringify(req.body)}`)
 failed`);
     }
 };
+
+
+// Handle Dorm delete on DELETE.
+exports.dorm_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Dorm.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
