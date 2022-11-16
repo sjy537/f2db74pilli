@@ -60,10 +60,25 @@ exports.dorm_create_post = async function(req, res) {
 
 
 
-// Handle Dorm delete form on DELETE.
-exports.dorm_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Dorm delete DELETE ' + req.params.id);
-};
+// // Handle Dorm delete form on DELETE.
+// exports.dorm_delete = function(req, res) {
+//  res.send('NOT IMPLEMENTED: Dorm delete DELETE ' + req.params.id);
+// };
+
+// Handle Dorm delete on DELETE.
+exports.dorm_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Dorm.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
+
 // Handle Dorm update form on PUT.
 exports.dorm_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Dorm update PUT' + req.params.id);
