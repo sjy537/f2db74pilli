@@ -31,6 +31,7 @@ var selectorRouter = require('./routes/selector');
 var resourceRouter = require('./routes/resource');
 
 
+
 var app = express();
 
 // view engine setup
@@ -49,6 +50,7 @@ app.use('/dorm', dormRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+
 
 
 // catch 404 and forward to error handler

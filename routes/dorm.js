@@ -18,3 +18,5 @@ var router = express.Router();
 router.get('/', dorm_controlers.dorm_view_all_Page );
 module.exports = router;
 
+/* GET detail dorm page */
+router.get('/detail', dorm_controlers.dorm_view_one_Page);
