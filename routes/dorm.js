@@ -21,4 +21,11 @@ router.get('/', dorm_controlers.dorm_view_all_Page );
 /* GET detail dorm page */
 router.get('/detail', dorm_controlers.dorm_view_one_Page);
 
+
+/* GET create dorm page */
+router.get('/create', dorm_controlers.dorm_create_Page);
+
+/* GET create update page */
+router.get('/update', dorm_controlers.dorm_update_Page);
+
 module.exports = router;

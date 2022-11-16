@@ -126,3 +126,32 @@ exports.dorm_view_one_Page = async function(req, res) {
     }
    };
 
+
+// Handle building the view for creating a dorm.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.dorm_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('dormcreate', { title: 'Dorm Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+};
+
+
+// Handle building the view for updating a dorm.
+// query provides the id
+exports.dorm_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Dorm.findById(req.query.id)
+    res.render('dormupdate', { title: 'Dorm Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
