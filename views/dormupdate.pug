@@ -1,0 +1,43 @@
+extends layout 
+block content 
+  h1= title 
+ 
+  - let dorm_Id = toShow._id
+  - let dorm_Name = toShow.dorm_Name
+  - let dorm_Type = toShow.dorm_Type
+  - let dorm_Cost = toShow.dorm_Cost 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{dorm_Id}
+  - let actionid = "/resource/dorms/" + dorm_Id
+  form(id='DormForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.dormAttr(for='dorm_Name') Dorm Name
+        input#dorm_Name(type='text', name='dorm_Name', value= dorm_Name ) 
+    div.form-group 
+        label.dormAttr(for='dorm_Type') Dorm Type
+        input#dorm_Type(type='text', name='dorm_Type', value= dorm_Type ) 
+    div.form-group 
+        label.dormAttr(for='dorm_Cost') Dorm Cost
+        input#dorm_Cost(type='number', name='dorm_Cost', value= dorm_Cost ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['DormForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json();
+        //return resp.text(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    });

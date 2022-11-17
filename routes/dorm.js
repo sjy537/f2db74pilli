@@ -28,4 +28,7 @@ router.get('/create', dorm_controlers.dorm_create_Page);
 /* GET create update page */
 router.get('/update', dorm_controlers.dorm_update_Page);
 
+/* GET delete dorm page */
+router.get('/delete', dorm_controlers.dorm_delete_Page);
+
 module.exports = router;

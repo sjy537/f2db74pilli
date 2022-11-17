@@ -60,10 +60,18 @@ exports.dorm_create_post = async function(req, res) {
 
 
 
-// // Handle Dorm delete form on DELETE.
-// exports.dorm_delete = function(req, res) {
-//  res.send('NOT IMPLEMENTED: Dorm delete DELETE ' + req.params.id);
-// };
+// Handle Dorm delete form on DELETE.
+exports.dorm_delete = async function(req, res) {
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Dorm.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+};
 
 // Handle Dorm delete on DELETE.
 exports.dorm_delete = async function(req, res) {
@@ -80,8 +88,23 @@ exports.dorm_delete = async function(req, res) {
 
 
 // Handle Dorm update form on PUT.
-exports.dorm_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: Dorm update PUT' + req.params.id);
+exports.dorm_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body 
+    ${JSON.stringify(req.body)}`) 
+        try { 
+            let toUpdate = await Dorm.findById( req.params.id) 
+            // Do updates of properties 
+            if(req.body.dorm_Name) toUpdate.dorm_Name = req.body.dorm_Name; 
+            if(req.body.dorm_Type) toUpdate.dorm_Type = req.body.dorm_Type; 
+            if(req.body.dorm_Size) toUpdate.dorm_Size = req.body.dorm_Size; 
+            let result = await toUpdate.save(); 
+            console.log("Sucess " + result) 
+            res.send(result) 
+        } catch (err) { 
+            res.status(500) 
+            res.send(`{"error": ${err}: Update for id ${req.params.id} 
+    failed`); 
+        } 
 };
 
 
@@ -155,3 +178,17 @@ exports.dorm_update_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
    };
+
+   // Handle a delete one view with id from query
+exports.dorm_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Dorm.findById(req.query.id)
+    res.render('dormdelete', { title: 'Dorm Delete', toShow:result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+

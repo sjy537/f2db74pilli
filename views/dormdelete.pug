@@ -1,0 +1,52 @@
+extends layout 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let dorm_Id = toShow._id
+    - let dorm_Name = toShow.dorm_Name
+    - let dorm_Type = toShow.dorm_Type
+    - let dorm_Cost = toShow.dorm_Cost 
+    - let actionid = "/resource/dorm/" + dorm_Id 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='dormAttr mr-3') dorm ID is: 
+        div #{dorm_Id} 
+      div.row 
+        div(class='dormAttr mr-3') dorm Name is: 
+        div #{dorm_Name} 
+      div.row 
+        div(class='dormAttr mr-3') dorm Type is: 
+        div #{dorm_Type} 
+      div.row 
+        div(class='dormAttr mr-3') dorm Cost is: 
+        div #{dorm_Cost} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the dorm collection 
+      window.location.href='/dorm' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      // Dont need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/dorm' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 
