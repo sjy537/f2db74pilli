@@ -2,17 +2,22 @@ extends layout
 
 block content
   h1= title
-  p Welcome to Sanjay's Web Service #{title}
-  <br>
-  
-  - var results = [{"dorm_Name": "College Dorm", "dorm_Type": "Students", "dorm_Cost": 500},{"dorm_Name": "Single Room", "dorm_Type": "Professors", "dorm_Cost": 600},{"dorm_Name": "Tent", "dorm_Type": "For Single person", "dorm_Cost": 5000}]
-  - let items = results
-  div(class = "container-fluid")
-    div(class = "row")
-      each item, index in results 
-        div(class="col-sm-2", onClick=`buy(${index})`)         dorm_Name : #{item["dorm_Name"]}  <br>  dorm_Type : #{item["dorm_Type"]}  <br>  dorm_Cost: #{item["dorm_Cost"]}
-        script.
-          function buy(val) {
-            alert(`You purchased item ${val}`)
-          }
+  p Welcome to #{title} 
 
+  div(class="container-fluid")
+     div(class="row m-1")
+        each item,index in results
+            - let destination = `dispatch(\"/dorm/update?id=${item._id}\")`
+            div.col-sm-2(onclick=`buy(${index})`) dorm_Name: #{item["dorm_Name"]}  <br>  dorm_Type: #{item["dorm_Type"]} <br> dorm_Cost: #{item["dorm_Cost"]}
+            button.btn( class="btn-primary ml-1", onclick= destination) Update 
+
+   
+  script.
+    function buy(index){
+      alert("you purchased item "+(index+1))
+    }
+
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }
