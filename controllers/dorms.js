@@ -1,5 +1,7 @@
 var Dorm = require('../models/dorm');
 
+
+
 // List of all Dorms
 exports.dorm_list = async function(req, res) {
     try{

@@ -1,24 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to Sanjay's Web Service #{title}
-  <br>
-  
-  //-  input(type="button", class="btn btn-primary" value ="Press Me" onClick = "doBump()")
-  button(type='button',class='btn btn-danger',onclick='doBump()') Press Me
-  <br><br>
-  div#bump Bump the count 
-
-  <br><br>
-  script.
-    var count=0;
-    var bump=1;
-    function doBump(){
-      count=count+bump; 
-      bump=bump+1;
-      print=document.getElementById("bump");
-      print.innerHTML='Count '+count+' with bump '+bump;
-    }
-
-//- a(href='./dorm') dorm
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+  br
+ if (user)
+  p You are currently logged in as #{user.username} 
+  a(href="/dorm") Take me to dorms
+  br
+  a(href="/logout") Logout
