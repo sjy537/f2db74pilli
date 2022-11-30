@@ -7,17 +7,20 @@ block content
   div(class="container-fluid")
     div(class="row m-1")
       -let tocreate = `dispatch(\"/dorm/create")`
-        button.btn( class="btn-success ml-1", onclick= tocreate) Create a New Dorm  
+        button.btn( class="btn btn-outline-info ml-2", onclick= tocreate) Create a New Dorm  
 
   div(class="container-fluid")
     div(class="row m-1")
         each item,index in results 
          - let destination = `dispatch(\"/dorm/update?id=${item._id}\")`     
              div.col-sm-2(onclick=`buy(${index})`) dorm_Name: #{item["dorm_Name"]}  <br>  dorm_Type: #{item["dorm_Type"]} <br> dorm_Cost: #{item["dorm_Cost"]}
-             button.btn( class="btn-secondary ml-1", onclick= destination) Update 
+             button.btn( class="btn btn-outline-danger ml-1", onclick= destination) Update 
              div(class="row m-1")
              - let toView = `dispatch(\"/dorm/detail?id=${item._id}\")`
-             button.btn( class="btn-danger ml-1", onclick= toView) Detail View 
+             button.btn( class="btn btn-outline-warning ml-1", onclick= toView) Detail View
+             div(class="row m-1")
+             - let toDelete = `dispatch(\"/dorm/delete?id=${item._id}\")`
+                button.btn( class="btn btn-outline-success ml-1", onclick= toDelete) Delete View  
 
        
 

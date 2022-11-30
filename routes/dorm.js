@@ -36,17 +36,23 @@ router.get('/detail', dorm_controlers.dorm_view_one_Page);
 
 
 /* GET create dorm page */
-router.get('/create', dorm_controlers.dorm_create_Page);
+// router.get('/create', dorm_controlers.dorm_create_Page);
+
+router.get('/create', secured, dorm_controlers.dorm_create_Page);
+
+/* GET delete dorm page */
+router.get('/delete', secured, dorm_controlers.dorm_delete_Page);
+
+
 
 // /* GET create update page */
 // router.get('/update', dorm_controlers.dorm_update_Page);
 
-/* GET update dorm page */
+/* GET update dorm page */ 
 router.get('/update', secured,
  dorm_controlers.dorm_update_Page);
 
-/* GET delete dorm page */
-router.get('/delete', dorm_controlers.dorm_delete_Page);
+
 
 
 
